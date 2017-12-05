@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.cobee</groupId>
-	<artifactId>redisuseage</artifactId>
+	<artifactId>bookstore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>redisuseage</name>
+	<name>bookstore</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
