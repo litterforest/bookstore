@@ -17,5 +17,9 @@
 		<constructor-arg index="0" ref="jedisPoolConfig" />
 		<constructor-arg index="1" value="127.0.0.1" />
 	</bean>
+	
+	<bean id="jedisBean" class="com.cobee.bookstore.component.JedisBean">
+		<property name="jedisPool" ref="jedisPool"></property>
+	</bean>
 
 </beans>
