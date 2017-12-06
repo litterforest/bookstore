@@ -6,7 +6,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/applicationContext-tx.xml,
-			/WEB-INF/applicationContext-jedis.xml
+			/WEB-INF/applicationContext-redis.xml
 			/WEB-INF/applicationContext.xml</param-value>
 	</context-param>
 
