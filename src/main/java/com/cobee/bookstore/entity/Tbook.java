@@ -83,5 +83,5 @@ public class Tbook implements Serializable {
 	public void setPicurl(String picurl) {
 		this.picurl = picurl;
 	}
-
+	
 }

@@ -23,7 +23,34 @@ import redis.clients.jedis.Jedis;
 public class TbookServiceRedisImpl extends AbstractService implements ITbookService { 
 	
 	public Tbook get(String isbn) {
-		return null;
+		if (StringUtils.isBlank(isbn))
+		{
+			return null;
+		}
+		Tbook tbook = null;
+		Jedis jedis = jedisBean.getJedis();
+		try
+		{
+			String bookJsonStr = jedis.hget("hash:books", isbn);
+			if (StringUtils.isNotBlank(bookJsonStr))
+			{
+				ObjectMapper objectMapper = new ObjectMapper();
+				tbook = objectMapper.readValue(bookJsonStr, Tbook.class);
+			}
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally
+		{
+			jedisBean.closeJedis(jedis);
+		}
+		
+		
+		return tbook;
 	}
 
 	public List<Tbook> listAll() {

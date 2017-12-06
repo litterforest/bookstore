@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cobee.bookstore.entity.Tbook;
@@ -25,6 +26,14 @@ public class TbookController extends AbstractController {
 		List<Tbook> tbookList = ITbookService.listAll();
 		model.addAttribute("tbookList", tbookList);
 		return "list";
+	}
+	
+	@GetMapping("form/{isbn}")
+	public String form(@PathVariable String isbn, Model model)
+	{
+		Tbook tbook = ITbookService.get(isbn);
+		model.addAttribute("book", tbook);
+		return "bookform";
 	}
 	
 }
