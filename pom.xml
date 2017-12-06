@@ -9,6 +9,24 @@
 
 	<name>bookstore</name>
 	<url>http://maven.apache.org</url>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profile.env>dev</profile.env>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profile.env>prod</profile.env>
+			</properties>
+		</profile>
+	</profiles>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -78,19 +96,19 @@
 			<artifactId>jackson-core</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-jaxb-annotations</artifactId>
@@ -110,10 +128,20 @@
 		</dependency>
 
 	</dependencies>
-	
+
 	<build>
-		<plugins>
 		
+		<finalName>bookstore</finalName>
+	
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		
+		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -123,8 +151,8 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
-	
+
 </project>

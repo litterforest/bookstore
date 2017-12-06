@@ -5,9 +5,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext-tx.xml,
-			/WEB-INF/applicationContext-redis.xml
-			/WEB-INF/applicationContext.xml</param-value>
+		<param-value>classpath:applicationContext-tx.xml,classpath:applicationContext-redis.xml,classpath:applicationContext.xml</param-value>
 	</context-param>
 
 	<listener>
