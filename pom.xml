@@ -11,12 +11,22 @@
 	<url>http://maven.apache.org</url>
 	
 	<profiles>
+	
 		<profile>
 			<id>dev</id>
 			<properties>
 				<profile.env>dev</profile.env>
 			</properties>
-			
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		
+		<profile>
+			<id>test</id>
+			<properties>
+				<profile.env>test</profile.env>
+			</properties>
 		</profile>
 		
 		<profile>
@@ -24,10 +34,8 @@
 			<properties>
 				<profile.env>prod</profile.env>
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 		</profile>
+		
 	</profiles>
 
 	<properties>
@@ -159,7 +167,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>  
                 <version>2.2</version>
                 <configuration>
-                	<port>8080</port>
+                	<port>8088</port>
                 </configuration>
             </plugin>  
 
