@@ -10,6 +10,9 @@
 <script type="text/javascript">
 	function start_onclick()
 	{
+		
+		$("#table").empty();
+		$("#table").append($("<tr><th>用户号</th><th>处理线程</th><th>处理时间(秒)</th></tr>"));
 		var batchNumber = ${param.batchNumber};
 		var interval = 20;
 		var startIdx = (batchNumber * interval);
@@ -19,7 +22,7 @@
 			
 			$.ajax({
 			   type: "POST",
-			   url: "${ctx }/Auctiondo",
+			   url: "${ctx }/Auction/doAuction",
 			   data: {userno : i},
 			   success: function(data){
 			      if (data.status == "success")
