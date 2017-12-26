@@ -29,6 +29,11 @@
 			    	  var trObj = $("<tr><td>"+ data.userno +"</td><td>"+ data.threadName +"</td><td>"+ data.duration +"</td><td>"+ data.msg +"</td></tr>");
 			    	  $("#table").append(trObj);
 		    	  }
+			   },
+			   error: function(xhr, textStatus, errorThrown)
+			   {
+				   var trObj = $("<tr><td colspan=\"4\">"+ data.textStatus +"</td></tr>");
+			       $("#table").append(trObj);
 			   }
 			});
 			

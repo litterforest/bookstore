@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,6 @@ public class AuctionController extends AbstractController {
 	@ResponseBody
 	public Callable<Map<String, Object>> doAuction(final String userno, String isbn)
 	{
-		
 		// 1,增加到redis队列
 		Jedis jedis = null;
 		try

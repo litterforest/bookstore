@@ -16,7 +16,7 @@ import redis.clients.jedis.Jedis;
 public class AuctionCallable implements Callable<Map<String, Object>> {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AuctionCallable.class);
-	private static Object lock = new Object();
+	private static final Object lock = new Object();
 
 	private JedisBean jedisBean;
 	private String userno;
@@ -39,7 +39,7 @@ public class AuctionCallable implements Callable<Map<String, Object>> {
 		
 		// 模拟计算时间
 		long startTime = System.currentTimeMillis();
-		Thread.sleep(300);
+		Thread.sleep(500);
 		Jedis jedis = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		try
