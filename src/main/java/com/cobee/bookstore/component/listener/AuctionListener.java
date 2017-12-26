@@ -87,7 +87,11 @@ public class AuctionListener implements ServletContextListener {
 						{
 							if (asyncContext != null)
 							{
-								asyncContext.complete();
+								try {
+									asyncContext.complete();
+								} catch (Exception e) {
+									logger.error("", e);
+								}
 							}
 						}
 					}
