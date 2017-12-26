@@ -10,18 +10,17 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="myThreadPool"
+	<!-- <bean id="myThreadPool"
 		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-		<property name="corePoolSize" value="5" /><!--最小线程数 -->
-		<property name="maxPoolSize" value="50" /><!--最大线程数 -->
-		<property name="queueCapacity" value="5000" /><!--缓冲队列大小 -->
-		<property name="threadNamePrefix" value="auction-" /><!--线程池中产生的线程名字前缀 -->
-		<property name="keepAliveSeconds" value="30" /><!--线程池中空闲线程的存活时间单位秒 -->
-	</bean>
+		<property name="corePoolSize" value="5" />最小线程数
+		<property name="maxPoolSize" value="50" />最大线程数
+		<property name="queueCapacity" value="5000" />缓冲队列大小
+		<property name="threadNamePrefix" value="auction-" />线程池中产生的线程名字前缀
+		<property name="keepAliveSeconds" value="30" />线程池中空闲线程的存活时间单位秒
+	</bean> -->
 
 	<mvc:annotation-driven>
-		<mvc:async-support default-timeout="10000"
-			task-executor="myThreadPool" />
+		<mvc:async-support default-timeout="10000" />
 	</mvc:annotation-driven>
 
 	<context:component-scan base-package="com.cobee.bookstore.web">

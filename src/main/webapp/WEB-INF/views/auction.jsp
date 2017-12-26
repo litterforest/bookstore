@@ -12,22 +12,21 @@
 	{
 		
 		$("#table").empty();
-		$("#table").append($("<tr><th>用户号</th><th>处理线程</th><th>处理时间(秒)</th></tr>"));
+		$("#table").append($("<tr><th>用户号</th><th>处理线程</th><th>处理时间(秒)</th><th>消息信息</th></tr>"));
 		var batchNumber = ${param.batchNumber};
 		var interval = 20;
 		var startIdx = (batchNumber * interval);
 		var endIdx = startIdx + interval;
 		for (var i = startIdx; i < endIdx; i++)
 		{
-			
 			$.ajax({
 			   type: "POST",
 			   url: "${ctx }/Auction/doAuction",
-			   data: {userno : i},
+			   data: {userno : i, isbn : "isbn-001"},
 			   success: function(data){
 			      if (data.status == "success")
 		    	  {
-			    	  var trObj = $("<tr><td>"+ data.userno +"</td><td>"+ data.threadName +"</td><td>"+ data.duration +"</td></tr>");
+			    	  var trObj = $("<tr><td>"+ data.userno +"</td><td>"+ data.threadName +"</td><td>"+ data.duration +"</td><td>"+ data.msg +"</td></tr>");
 			    	  $("#table").append(trObj);
 		    	  }
 			   }
@@ -45,6 +44,7 @@
 			<th>用户号</th>
 			<th>处理线程</th>
 			<th>处理时间(秒)</th>
+			<th>消息信息</th>
 		</tr>
 	</table>
 </body>
