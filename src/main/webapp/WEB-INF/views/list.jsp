@@ -14,7 +14,7 @@
 			
 				<c:forEach items="${tbookList }" var="book" >
 					<tr>
-						<td rowspan="3" ><img alt="" src="${ctx }${book.picurl}"></td>
+						<td rowspan="4" ><img alt="" src="${ctx }${book.picurl}"></td>
 						<td colspan="2" align="center" ><a href="${ctx }/tbook/form/${book.isbn }">${book.bname }</a></td>
 					</tr>
 					<tr>
@@ -24,6 +24,10 @@
 					<tr>
 						<th>出版社</th>
 						<td>${book.press }</td>
+					</tr>
+					<tr>
+						<th>访问次数</th>
+						<td>${book.pageViews }</td>
 					</tr>
 				</c:forEach>
 				

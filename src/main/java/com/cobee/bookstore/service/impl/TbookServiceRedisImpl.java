@@ -72,6 +72,16 @@ public class TbookServiceRedisImpl extends AbstractService implements ITbookServ
 					{
 						try {
 							Tbook tbook = objectMapper.readValue(bookJsonStr, Tbook.class);
+							// 查找书本被浏览的次数
+							Double pageViews = jedis.zscore("zset:bookpageview", tbook.getIsbn());
+							if (pageViews != null)
+							{
+								tbook.setPageViews(pageViews.intValue());
+							}
+							else
+							{
+								tbook.setPageViews(0);
+							}
 							bookList.add(tbook);
 						} catch (JsonParseException e) {
 							e.printStackTrace();
@@ -95,6 +105,36 @@ public class TbookServiceRedisImpl extends AbstractService implements ITbookServ
 		}
 		
 		return bookList;
+	}
+
+	@Override
+	public void addBookPageView(String isbn) {
+		Jedis jedis = jedisBean.getJedis();
+		try
+		{ 
+			// 如果key不存在，会自动创建
+			jedis.zincrby("zset:bookpageview", 1, isbn);
+		}
+		finally
+		{
+			jedisBean.closeJedis(jedis);
+		}
+		
+	}
+
+	@Override
+	public Integer getBookPageView(String isbn) {
+		Jedis jedis = jedisBean.getJedis();
+		try
+		{ 
+			// 如果key不存在，会自动创建
+			jedis.zincrby("zset:bookpageview", 1, isbn);
+		}
+		finally
+		{
+			jedisBean.closeJedis(jedis);
+		}
+		return 0;
 	}
 
 }

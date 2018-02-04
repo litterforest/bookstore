@@ -21,6 +21,7 @@ public class Tbook implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date pdate;
 	private String picurl;
+	private Integer pageViews;
 
 	public Tbook() {
 		super();
@@ -34,6 +35,14 @@ public class Tbook implements Serializable {
 		this.price = price;
 		this.pdate = pdate;
 		this.picurl = picurl;
+	}
+	
+	public Integer getPageViews() {
+		return pageViews;
+	}
+
+	public void setPageViews(Integer pageViews) {
+		this.pageViews = pageViews;
 	}
 
 	public String getIsbn() {

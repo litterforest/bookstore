@@ -10,4 +10,8 @@ public interface ITbookService {
 	
 	List<Tbook> listAll();
 	
+	void addBookPageView(String isbn);
+	
+	Integer getBookPageView(String isbn);
+	
 }

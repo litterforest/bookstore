@@ -31,6 +31,8 @@ public class TbookController extends AbstractController {
 	@GetMapping("form/{isbn}")
 	public String form(@PathVariable String isbn, Model model)
 	{
+		// 访问书商品详情的时候，给页面访问次数增加1
+		ITbookService.addBookPageView(isbn);
 		Tbook tbook = ITbookService.get(isbn);
 		model.addAttribute("book", tbook);
 		return "bookform";

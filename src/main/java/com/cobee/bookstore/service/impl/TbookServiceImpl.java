@@ -25,4 +25,16 @@ public class TbookServiceImpl implements ITbookService {
 		return ITbookDao.listAll();
 	}
 
+	@Override
+	public void addBookPageView(String isbn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Integer getBookPageView(String isbn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
