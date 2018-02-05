@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import redis.clients.jedis.Jedis;
 
-@Service
+@Service("ICommentServiceImpl")
 public class ICommentServiceImpl extends AbstractService implements ICommentService {
 
 	@Override
@@ -30,7 +30,7 @@ public class ICommentServiceImpl extends AbstractService implements ICommentServ
 
 			ObjectMapper objectMapper = new ObjectMapper();
 			String jsonStr = objectMapper.writeValueAsString(comment);
-			jedis.rpush("list:comment:" + comment.getIsbn(), jsonStr);
+			jedis.lpush("list:comment:" + comment.getIsbn(), jsonStr);
 
 		} catch (JsonParseException e) {
 			e.printStackTrace();

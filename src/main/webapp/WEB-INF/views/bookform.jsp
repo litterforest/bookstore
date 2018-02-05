@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td colspan="3" align="center" >
-					<a href="${ctx }">评论</a>&nbsp;&nbsp;<a href="${ctx }/tbook/list" >返回</a>
+					<a href="${ctx }/comment/commentForm?isbn=${book.isbn}">评论</a>&nbsp;&nbsp;<a href="${ctx }/tbook/list" >返回</a>
 				</td>
 			</tr>
 		</table>
