@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class ICommentServiceImpl extends AbstractService implements ICommentServ
 			return;
 		Jedis jedis = jedisBean.getJedis();
 		try {
-
+			comment.setCommentID(UUID.randomUUID().toString());
 			ObjectMapper objectMapper = new ObjectMapper();
 			String jsonStr = objectMapper.writeValueAsString(comment);
 			jedis.lpush("list:comment:" + comment.getIsbn(), jsonStr);
@@ -75,7 +76,11 @@ public class ICommentServiceImpl extends AbstractService implements ICommentServ
 				for(String jsonStr : list)
 				{
 					try {
-						commentList.add(objectMapper.readValue(jsonStr, Comment.class));
+						Comment comment = objectMapper.readValue(jsonStr, Comment.class);
+						// 加载评论的点赞数
+						Double dianzhangcount = jedis.zscore("zset:comment:dianzhang", comment.getCommentID());
+						comment.setThumbsupCount(dianzhangcount == null ? 0 : dianzhangcount.intValue());
+						commentList.add(comment);
 					} catch (JsonParseException e) {
 						e.printStackTrace();
 					} catch (JsonMappingException e) {
@@ -94,6 +99,28 @@ public class ICommentServiceImpl extends AbstractService implements ICommentServ
 			jedisBean.closeJedis(jedis);
 		}
 		return commentList;
+	}
+
+	/**
+	 * 返回评论最新的点赞数量
+	 */
+	@Override
+	public Integer dianzhang(String commentID) {
+		Jedis jedis = jedisBean.getJedis();
+		Integer count = 0;
+		String redisKey = "zset:comment:dianzhang";
+		try {
+			
+			jedis.zincrby(redisKey, 1.0D, commentID);
+			Double dianzhang = jedis.zscore(redisKey, commentID);
+			if (dianzhang != null)
+			{
+				count = dianzhang.intValue();
+			}
+		} finally {
+			jedisBean.closeJedis(jedis);
+		}
+		return count;
 	}
 
 }

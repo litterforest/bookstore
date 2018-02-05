@@ -12,7 +12,7 @@ public class Comment implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 7055737964986260929L;
-
+	private String commentID;
 	private String isbn;
 	private String commentContent;
 	private Date createDate;
@@ -22,6 +22,14 @@ public class Comment implements Serializable {
 	private String commenterName;
 	// 点赞数量
 	private Integer thumbsupCount;
+	
+	public String getCommentID() {
+		return commentID;
+	}
+
+	public void setCommentID(String commentID) {
+		this.commentID = commentID;
+	}
 
 	public String getIsbn() {
 		return isbn;

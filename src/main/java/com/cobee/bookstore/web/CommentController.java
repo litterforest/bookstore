@@ -50,4 +50,21 @@ public class CommentController extends AbstractController {
 		ICommentService.add(comment);
 		return "redirect:commentForm?isbn=" + comment.getIsbn();
 	}
+	
+	@RequestMapping(value = "/dianzhang")
+	@ResponseBody
+	public Map<String, Object> dianzhang(String commentID)
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Integer count = ICommentService.dianzhang(commentID);
+			map.put("status", "success");
+			map.put("count", count);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("status", "fail");
+			map.put("msg", e.getMessage());
+		}
+		return map;
+	}
 }

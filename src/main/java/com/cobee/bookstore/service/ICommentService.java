@@ -12,4 +12,6 @@ public interface ICommentService {
 	
 	List<Comment> list(String isbn, Integer start, Integer end);
 	
+	Integer dianzhang(String commentID);
+	
 }

@@ -5,11 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>图书评论</title>
+<%@ include file="include/pageResources.jsp"%>
 </head>
 <body>
 	<div id="commentList">
 		<c:forEach items="${commentList }" var="comment" >
-			<div>${comment.commentContent } - <fmt:formatDate value="${comment.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></div>
+			<div>${comment.commentContent } - <fmt:formatDate value="${comment.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /> - <a href="#" onclick="dianzhang('${comment.commentID }')" >点赞(<span id="dianzhang${comment.commentID }">${comment.thumbsupCount }</span>)</a></div>
 		</c:forEach>
 	</div>
 	<form action="${ctx}/comment/saveComment" method="post" >
@@ -47,6 +48,22 @@
 			});
 			return false;
 		} */
+		
+		function dianzhang(commentID)
+		{
+			$.getJSON("${ctx}/comment/dianzhang", { commentID: commentID }, function(data){
+				if (data.status == "success")
+				{
+					$("#dianzhang" + commentID).text(data.count);
+				}
+				else if (data.status == "fail")
+				{
+					alert(data.msg);
+				}
+			});
+			return false;
+		}
+		
 	</script>
 </body>
 </html>
