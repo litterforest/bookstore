@@ -72,11 +72,11 @@ public class AuctionListener implements ServletContextListener {
 				
 		        while(true)
 		        {
-		        	try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+//		        	try {
+//						Thread.sleep(500);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
 		        	// 1, 查找所有图书抢购队列
 		        	Set<String> keys = jedis.keys("auction:book:queue:*");
 		        	if (!CollectionUtils.isEmpty(keys))
