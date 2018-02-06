@@ -33,21 +33,6 @@
 		</table>
 	</form>
 	<script type="text/javascript">
-		/* function submit_onclick(isbn)
-		{
-			$.getJSON("${ctx}/comment/saveComment", { isbn: isbn, commentContent: $("#commentContent").text() }, function(data){
-				if (data.status == "success")
-				{
-					var commentDiv = $("<div></div>");
-					$("#commentList").append();
-				}
-				else if (data.status == "fail")
-				{
-					alert(data.msg);
-				}
-			});
-			return false;
-		} */
 		
 		function dianzhang(commentID)
 		{

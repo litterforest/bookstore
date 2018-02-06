@@ -12,9 +12,9 @@
 	{
 		
 		$("#table").empty();
-		$("#table").append($("<tr><th>用户号</th><th>处理线程</th><th>处理时间(秒)</th><th>消息信息</th></tr>"));
+		$("#table").append($("<tr><th>用户号</th><th>处理线程</th><th>处理时间(秒)</th><th>消息信息</th><th>抢到的个数</th><th>还剩下的个数</th></tr>"));
 		var batchNumber = ${param.batchNumber};
-		var interval = 20;
+		var interval = 10;
 		var startIdx = (batchNumber * interval);
 		var endIdx = startIdx + interval;
 		for (var i = startIdx; i < endIdx; i++)
@@ -22,17 +22,16 @@
 			$.ajax({
 			   type: "POST",
 			   url: "${ctx }/Auction/doAuction",
-			   data: {userno : i, isbn : "isbn-001"},
+			   data: {userno : i, isbn : "00001"},
 			   success: function(data){
-			      if (data.status == "success")
 		    	  {
-			    	  var trObj = $("<tr><td>"+ data.userno +"</td><td>"+ data.threadName +"</td><td>"+ data.duration +"</td><td>"+ data.msg +"</td></tr>");
+			    	  var trObj = $("<tr><td>"+ data.userno +"</td><td>"+ data.threadName +"</td><td>"+ data.duration +"</td><td>"+ data.msg +"</td><td>"+ data.quality +"</td><td>"+ data.leftQuality +"</td></tr>");
 			    	  $("#table").append(trObj);
 		    	  }
 			   },
 			   error: function(xhr, textStatus, errorThrown)
 			   {
-				   var trObj = $("<tr><td colspan=\"4\">"+ data.textStatus +"</td></tr>");
+				   var trObj = $("<tr><td colspan=\"6\">"+ textStatus +"</td></tr>");
 			       $("#table").append(trObj);
 			   }
 			});
@@ -50,6 +49,8 @@
 			<th>处理线程</th>
 			<th>处理时间(秒)</th>
 			<th>消息信息</th>
+			<th>抢到的个数</th>
+			<th>还剩下的个数</th>
 		</tr>
 	</table>
 </body>

@@ -35,7 +35,7 @@ public class AuctiondoServlet extends HttpServlet {
 		AsyncContext asyncContext = request.startAsync();
 		asyncContext.setTimeout(10000);
 		asyncContext.getRequest().setAttribute("userno", userno);
-		AuctionListener.addAsyncContext(asyncContext);
+//		AuctionListener.addAsyncContext(asyncContext);
 		
 	}
 

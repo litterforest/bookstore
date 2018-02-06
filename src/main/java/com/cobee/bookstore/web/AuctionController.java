@@ -36,7 +36,7 @@ public class AuctionController extends AbstractController {
 		try
 		{
 			jedis = super.jedisBean.getJedis();
-			jedis.rpush("auction:book:queue", userno);
+			jedis.rpush("auction:book:queue:" + isbn, userno);
 		}
 		finally
 		{
@@ -45,8 +45,8 @@ public class AuctionController extends AbstractController {
 				jedis.close();
 			}
 		}
+		return new AuctionCallable(userno, isbn);
 		
-		return new AuctionCallable(super.jedisBean, userno, isbn);
 	}
 	
 	@PostMapping(value = "/doAuction1", produces = { MediaType.APPLICATION_JSON_VALUE })
