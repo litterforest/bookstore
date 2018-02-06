@@ -18,15 +18,17 @@ public class AuctionCallable implements Callable<Map<String, Object>> {
 
 	private String userno;
 	private String isbn;
+	private long timeMillis; 
 
 	public AuctionCallable() {
 		super();
 	}
 
-	public AuctionCallable(String userno, String isbn) {
+	public AuctionCallable(String userno, String isbn, long timeMillis) {
 		super();
 		this.userno = userno;
 		this.isbn = isbn;
+		this.timeMillis = timeMillis;
 	}
 
 	@Override
@@ -42,10 +44,10 @@ public class AuctionCallable implements Callable<Map<String, Object>> {
 			while(true)
 			{
 //				Thread.sleep(500);
-				result = AuctionListener.auctionResultMap.get(userno + ":" + isbn);
+				result = AuctionListener.auctionResultMap.get(userno + ":" + timeMillis + ":" + isbn);
 				if (result != null)
 				{
-					AuctionListener.auctionResultMap.remove(userno + ":" + isbn);
+					AuctionListener.auctionResultMap.remove(userno + ":" + timeMillis + ":" + isbn);
 					break;
 				}
 			}

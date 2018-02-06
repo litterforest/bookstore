@@ -33,10 +33,11 @@ public class AuctionController extends AbstractController {
 	{
 		// 1,增加到redis队列
 		Jedis jedis = null;
+		long timeMillis = System.currentTimeMillis();
 		try
 		{
 			jedis = super.jedisBean.getJedis();
-			jedis.rpush("auction:book:queue:" + isbn, userno);
+			jedis.rpush("auction:book:queue:" + isbn, userno + ":" + timeMillis);
 		}
 		finally
 		{
@@ -45,7 +46,7 @@ public class AuctionController extends AbstractController {
 				jedis.close();
 			}
 		}
-		return new AuctionCallable(userno, isbn);
+		return new AuctionCallable(userno, isbn, timeMillis);
 		
 	}
 	
